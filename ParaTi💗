@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Ti ❤️</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fdecec;
+    overflow: hidden;
+}
+
+.lluvia span {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+.card {
+    position: relative;
+    z-index: 2;
+    background: #fff4ec;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 8vh;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    gap: 20px;
+}
+
+.texto {
+    width: 50%;
+    color: #5a2a2a;
+}
+
+.contador {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.arbol {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.corazon {
+    width: 160px;
+    height: 140px;
+    background: red;
+    position: relative;
+    transform: rotate(-45deg);
+    animation: latir 1.5s infinite;
+}
+
+.corazon::before,
+.corazon::after {
+    content: "";
+    width: 160px;
+    height: 140px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.corazon::before {
+    top: -80px;
+}
+
+.corazon::after {
+    left: 80px;
+}
+
+.tronco {
+    width: 22px;
+    height: 80px;
+    background: #7a3e1d;
+    margin: auto;
+}
+
+@keyframes latir {
+    0% { transform: scale(1) rotate(-45deg); }
+    50% { transform: scale(1.1) rotate(-45deg); }
+    100% { transform: scale(1) rotate(-45deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="lluvia" id="lluvia"></div>
+
+<div class="card">
+    <div class="texto">
+        <h2>Para el amor de mi vida:</h2>
+        <p>
+            Si pudiera elegir un lugar seguro, sería a tu lado.<br><br>
+            Cuanto más tiempo estoy contigo, más te amo.
+        </p>
+        <p><strong>— I Love You ❤️</strong></p>
+        <div class="contador" id="contador"></div>
+    </div>
+
+    <div class="arbol">
+        <div>
+            <div class="corazon"></div>
+            <div class="tronco"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* CONTADOR */
+const inicio = new Date("2020-01-08T00:00:00");
+
+function actualizarContador() {
+    const ahora = new Date();
+    let diff = ahora - inicio;
+
+    let s = Math.floor(diff / 1000);
+    let m = Math.floor(s / 60);
+    let h = Math.floor(m / 60);
+    let d = Math.floor(h / 24);
+
+    h %= 24; m %= 60; s %= 60;
+
+    document.getElementById("contador").innerHTML =
+    `Mi amor por ti comenzó hace…<br>
+     ${d} días ${h} horas ${m} minutos ${s} segundos`;
+}
+
+setInterval(actualizarContador, 1000);
+actualizarContador();
+
+/* LLUVIA DE CORAZONES */
+const lluvia = document.getElementById("lluvia");
+
+function crearCorazon() {
+    const corazon = document.createElement("span");
+    corazon.innerHTML = "❤️";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.animationDuration = (3 + Math.random() * 5) + "s";
+    corazon.style.fontSize = (14 + Math.random() * 20) + "px";
+    lluvia.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 8000);
+}
+
+setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html>
